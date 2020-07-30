@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,9 +16,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive: 2020 - 门✈❣Bツ⊙g❦✈♂</title>
+  <title>Hadoop搭建 - 门✈❣Bツ⊙g❦✈♂</title>
+  
+    <meta name="keywords" content="hadoop">
   
 
+  
+    <meta name="description" content="关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x官网地址：https://hadoop.apache.org/docs/current/">
   
 
   <!-- feed -->
@@ -68,7 +70,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -441,10 +443,10 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">Hadoop 3.x 单机安装</div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink"></div>
+  <div id="pjax-permalink">http://yoursite.com/2020/07/30/Hadoop/</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">none</div>
@@ -479,16 +481,11 @@
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-            <div class='post-wrapper'>
-              <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -498,11 +495,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/07/30/Hadoop/">
       Hadoop 3.x 单机安装
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -546,6 +543,11 @@
           
             
               
+
+            
+          
+            
+              
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
@@ -579,32 +581,6 @@
 
             
           
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/07/30/Hadoop/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/07/30/Hadoop/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-  <div class="new-meta-item top-post">
-    <a class='notlink'>
-      <i class="fas fa-angle-double-up fa-fw" aria-hidden="true"></i>
-      <p>Top</p>
-    </a>
-  </div>
-
-
-            
-          
         </div>
         
           <hr>
@@ -614,410 +590,323 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x<br>官网地址：<a target="_blank" rel="noopener" href="https://hadoop.apache.org/docs/current/">https://hadoop.apache.org/docs/current/</a></p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/07/30/Hadoop/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-            </div>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
           
+          
+          <p>关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x<br>官网地址：<a target="_blank" rel="noopener" href="https://hadoop.apache.org/docs/current/">https://hadoop.apache.org/docs/current/</a></p>
+<a id="more"></a>
+<h5 id="一、下载hadoop"><a href="#一、下载hadoop" class="headerlink" title="一、下载hadoop"></a>一、下载hadoop</h5><pre><code>https://hadoop.apache.org/releases.html</code></pre>
+<h5 id="二、解压hadoop包"><a href="#二、解压hadoop包" class="headerlink" title="二、解压hadoop包"></a>二、解压hadoop包</h5><pre><code>tar -zxvf hadoop-3.1.2.tar.gz</code></pre>
+<h5 id="三、修改hosts文件"><a href="#三、修改hosts文件" class="headerlink" title="三、修改hosts文件"></a>三、修改hosts文件</h5><pre><code>1. vim /etc/hosts  
+2. 添加 0.0.0.0(内网ip) master master 
+3. source /etc/profile</code></pre>
+<h5 id="四、生成ssh密钥"><a href="#四、生成ssh密钥" class="headerlink" title="四、生成ssh密钥"></a>四、生成ssh密钥</h5><pre><code>1. ssh-keygen -t rsa -P &#39;&#39; 
+# 第一个回车-输入要生成的文件名(默认id_rsa)
+# 第二个回车-输入生成密钥密码(默认为空)
+# 第三个回车-重复输入密码(默认为空)
+2. cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys #master主机(互信密钥)
+# 不设置密钥互信会导致启动时出现权限不足的异常</code></pre>
+<h5 id="五、配置hadoop-Home"><a href="#五、配置hadoop-Home" class="headerlink" title="五、配置hadoop Home"></a>五、配置hadoop Home</h5><pre><code>1. vim /etc/profile 
+2. 添加 #hadoop enviroment hadoop环境变量
+export HADOOP_HOME=/usr/local/hadoop-3.1.2/ #hadoop 根目录
+export PATH=&quot;$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH&quot;
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop 
+3. source /etc/profile #重新加载源文件</code></pre>
+<h5 id="六、修改hadoop-配置文件"><a href="#六、修改hadoop-配置文件" class="headerlink" title="六、修改hadoop 配置文件"></a>六、修改hadoop 配置文件</h5><ul>
+<li>$HADOOP_HOME  # hadoop 根目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;hadoop-env.sh   # 修改行 export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_112&#x2F;</span><br><span class="line">$HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;slaves (添加集群节点hostname,单机节点不需要修改)</span><br><span class="line">$HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;core-site.xml   #添加如下内容：</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hdfs:&#x2F;&#x2F;master:9000&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">         &lt;name&gt;io.file.buffer.size&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;131072&lt;&#x2F;value&gt;</span><br><span class="line">       &lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;usr&#x2F;local&#x2F;hadoop-3.1.2&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>$HADOOP_HOME/etc/hadoop/hdfs-site.xml #添加如下内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">       &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.secondary.http-address&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;master:50090&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">         &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;file:&#x2F;usr&#x2F;local&#x2F;hadoop-3.1.2&#x2F;hdfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;file:&#x2F;usr&#x2F;local&#x2F;hadoop-3.1.2&#x2F;hdfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.permissions&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;&#x2F;value&gt;</span><br><span class="line">     &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.client.block.write.replace-datanode-on-failure.enable&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.client.block.write.replace-datanode-on-failure.policy&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;NEVER&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>$HADOOP_HOME/etc/hadoop/mapred-site.xml(cp mapred-site.xml.template mapred-site.xml)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">      &lt;property&gt;</span><br><span class="line">          &lt;name&gt;mapreduce.jobhistory.address&lt;&#x2F;name&gt;</span><br><span class="line">          &lt;value&gt;master:10020&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">          &lt;name&gt;mapreduce.jobhistory.address&lt;&#x2F;name&gt;</span><br><span class="line">          &lt;value&gt;master:19888&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;!--   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.application.classpath&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;$HADOOP_MAPRED_HOME&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;*:$HADOOP_MAPRED_HOME&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;lib&#x2F;*&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt; --&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>$HADOOP_HOME/etc/hadoop/yarn-site.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">           &lt;name&gt;yarn.resourcemanager.address&lt;&#x2F;name&gt;</span><br><span class="line">           &lt;value&gt;master:8032&lt;&#x2F;value&gt;</span><br><span class="line">     &lt;&#x2F;property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">          &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;&#x2F;name&gt;</span><br><span class="line">          &lt;value&gt;master:8030&lt;&#x2F;value&gt;</span><br><span class="line">      &lt;&#x2F;property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;master:8031&lt;&#x2F;value&gt;</span><br><span class="line">     &lt;&#x2F;property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.admin.address&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;master:8033&lt;&#x2F;value&gt;</span><br><span class="line">     &lt;&#x2F;property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.webapp.address&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;master:8088&lt;&#x2F;value&gt;</span><br><span class="line">         &lt;&#x2F;property&gt;</span><br><span class="line">   &lt;!-- &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.env-whitelist&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt; --&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="七、格式化namenode-节点"><a href="#七、格式化namenode-节点" class="headerlink" title="七、格式化namenode 节点"></a>七、格式化namenode 节点</h5>  hadoop namenode -format</li>
+</ul>
+<h5 id="八、脚本配置"><a href="#八、脚本配置" class="headerlink" title="八、脚本配置"></a>八、脚本配置</h5><pre><code>1.启动
+#!/bin/bash
+echo -e &quot;\033[31m ========Start The Cluster======== \033[0m&quot;
+echo -e &quot;\033[31m Starting Hadoop Now !!! \033[0m&quot;
+/opt/hadoop-2.7.3/sbin/start-all.sh
+echo -e &quot;\033[31m Starting Spark Now !!! \033[0m&quot;
+/opt/spark-2.1.0-bin-hadoop2.7/sbin/start-all.sh
+echo -e &quot;\033[31m The Result Of The Command \&quot;jps\&quot; :  \033[0m&quot;
+jps
+echo -e &quot;\033[31m ========END======== \033[0m&quot;
+
+2.停止脚本
+#!/bin/bash
+echo -e &quot;\033[31m ===== Stoping The Cluster ====== \033[0m&quot;
+echo -e &quot;\033[31m Stoping Spark Now !!! \033[0m&quot;
+/opt/spark-2.1.0-bin-hadoop2.7/sbin/stop-all.sh
+echo -e &quot;\033[31m Stopting Hadoop Now !!! \033[0m&quot;
+/opt/hadoop-2.7.3/sbin/stop-all.sh
+echo -e &quot;\033[31m The Result Of The Command \&quot;jps\&quot; :  \033[0m&quot;
+jps
+echo -e &quot;\033[31m ======END======== \033[0m&quot;</code></pre>
+<h5 id="九、查看节点-jps"><a href="#九、查看节点-jps" class="headerlink" title="九、查看节点 jps"></a>九、查看节点 jps</h5><pre><code>----- Jps
+----- DataNode
+----- NameNode
+----- NodeManager
+----- SecondaryNameNode
+看到所有节点代表启动成功</code></pre>
+<h5 id="十、root启动报错"><a href="#十、root启动报错" class="headerlink" title="十、root启动报错"></a>十、root启动报错</h5><pre><code>start-dfs.sh / stop-dfs.sh
+HDFS_DATANODE_USER=root
+HADOOP_SECURE_DN_USER=hdfs
+HDFS_NAMENODE_USER=root
+HDFS_SECONDARYNAMENODE_USER=root
+
+start-yarn.sh / stop-yarn.sh
+YARN_RESOURCEMANAGER_USER=root
+HADOOP_SECURE_DN_USER=yarn
+YARN_NODEMANAGER_USER=root
+参考 http://www.cnblogs.com/purstar/p/6293605.html</code></pre>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
         
           
-            <div class='post-wrapper'>
-              <article class="post white-box shadow reveal ">
+            
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
   
 
 
-  <section class='meta'>
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-30T18:23:45+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jul 30, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>大数据</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
       
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/07/30/Hadoop/&title=Hadoop搭建 - 门✈❣Bツ⊙g❦✈♂&summary=关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x官网地址：https://hadoop.apache.org/docs/current/"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
+          
+        </a>
       
-      <div class="meta" id="header-meta">
-        
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-  <h2 class="title">
-    <a href="/2020/07/29/index/">
-      欢迎光临红浪漫
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/07/30/Hadoop/&title=Hadoop搭建 - 门✈❣Bツ⊙g❦✈♂&summary=关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x官网地址：https://hadoop.apache.org/docs/current/"
           
-            
+          >
           
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="https://i.loli.net/2020/07/29/nAICMVZye6zFNLT.jpg">
-    <p>mxp</p>
-  </a>
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/07/30/Hadoop/&title=Hadoop搭建 - 门✈❣Bツ⊙g❦✈♂&summary=关于hadoop 3.x 版本基础安装个人总结，建议以官网为指导进行配置，不同版本不一致，本教程适用于3.1.x官网地址：https://hadoop.apache.org/docs/current/"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
 </div>
 
-            
-          
-            
-              
 
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jul 29, 2020</p>
-  </a>
-</div>
 
-            
+        
+      
+        
           
-            
-              
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>7 words</p>
+      <p>1.3k words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
+      <p>7 min</p>
     </a>
   </div>
 
 
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/07/29/index/" class="leancloud_visitors" data-flag-title="欢迎光临红浪漫">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/07/29/index/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/07/29/index/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-  <div class="new-meta-item top-post">
-    <a class='notlink'>
-      <i class="fas fa-angle-double-up fa-fw" aria-hidden="true"></i>
-      <p>Top</p>
-    </a>
-  </div>
-
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>男宾三位里边请～</p>
-
       
     </div>
-    
-      
-    
   </section>
-</article>
 
-            </div>
-          
-        
-      
-    
-    
-      
-        
-      
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
 
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/07/29/index/'>
+                <p class='title'>欢迎光临红浪漫<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>男宾三位里边请～
+</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
   
 
+  
+    
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      <section id="comments">
+        <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
 
-	
+      </section>
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
 </div>
 <aside class='l_side'>
   
   
-    
-    
-
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://i.loli.net/2020/07/30/CceEZsglHyO8pWm.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>无长无少，道之长存</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="mailto:menxipeng@gmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/MenXiPeng"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=358540113"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
 
   
     
     
-  
 
-  <section class="widget category shadow desktop">
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"
-            id="categoriesE5A4A7E695B0E68DAE"
-            ><div class='name'>大数据</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop%E6%90%AD%E5%BB%BA/" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop%E6%90%AD%E5%BB%BA/"
-            id="categoriesE5A4A7E695B0E68DAEHadoopE690ADE5BBBA"
-            ><div class='name'>Hadoop搭建</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BDhadoop"><span class="toc-text">一、下载hadoop</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%8E%8Bhadoop%E5%8C%85"><span class="toc-text">二、解压hadoop包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BF%AE%E6%94%B9hosts%E6%96%87%E4%BB%B6"><span class="toc-text">三、修改hosts文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%94%9F%E6%88%90ssh%E5%AF%86%E9%92%A5"><span class="toc-text">四、生成ssh密钥</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%85%8D%E7%BD%AEhadoop-Home"><span class="toc-text">五、配置hadoop Home</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BF%AE%E6%94%B9hadoop-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">六、修改hadoop 配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96namenode-%E8%8A%82%E7%82%B9"><span class="toc-text">七、格式化namenode 节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-text">八、脚本配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9-jps"><span class="toc-text">九、查看节点 jps</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%81%E3%80%81root%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99"><span class="toc-text">十、root启动报错</span></a></li></ol>
     </div>
   </section>
 
 
   
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 14px; color: #999">大数据</a>
-    </div>
-  </section>
-
-
-  
-
-  
-
-  
-    
-    
-
-<section class="widget shadow desktop">
-  
-  <header>
-    
-      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>2 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2020/01/01'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>1.3k 字</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
-        </div>
-      
-
-      
-        
-          
-<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
-
-          
-<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/locale/zh-cn.min.js"></script>
-
-        
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Thu Jul 30 2020 18:24:52 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2020-07-30 日</div>
-          
-        </div>
-        
-        <script>
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = moment(new Date(lastUpDate)).fromNow();
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2020-07-30 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
