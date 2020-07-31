@@ -4,33 +4,6 @@
   
     
     <entry>
-      <title>Linux lsof命令</title>
-      <link href="/2020/07/30/Liunx-lsof/"/>
-      <url>/2020/07/30/Liunx-lsof/</url>
-      
-        <content type="html"><![CDATA[<p>lsof命令可以列出被进程所打开的文件的信息。被打开的文件可以是</p><ul><li>普通的文件，</li><li>目录  <a id="more"></a></li><li>网络文件系统的文件，</li><li>字符设备文件  </li><li>(函数)共享库  </li><li>管道，命名管道 </li><li>符号链接</li><li>底层的socket字流，网络socket，unix域名socket<br>在linux里面，大部分的东西都是被当做文件的…..还有其他很多</li></ul><hr><h6 id="一、列出所有打开的文件"><a href="#一、列出所有打开的文件" class="headerlink" title="一、列出所有打开的文件"></a>一、列出所有打开的文件</h6><pre><code>lsof # 备注: 如果不加任何参数，就会打开所有被打开的文件，建议加上一下参数来具体定位</code></pre><h6 id="二、列出所有打开的文件"><a href="#二、列出所有打开的文件" class="headerlink" title="二、列出所有打开的文件"></a>二、列出所有打开的文件</h6><pre><code>lsof   /filepath/file </code></pre><h5 id="三、递归查看某个目录的文件信息"><a href="#三、递归查看某个目录的文件信息" class="headerlink" title="三、递归查看某个目录的文件信息"></a>三、递归查看某个目录的文件信息</h5><pre><code>lsof +D /filepath/filepath2/ # 使用了+D，对应目录下的所有子目录和文件都会被列出</code></pre><h5 id="四、遍历查看某个目录的所有文件信息"><a href="#四、遍历查看某个目录的所有文件信息" class="headerlink" title="四、遍历查看某个目录的所有文件信息"></a>四、遍历查看某个目录的所有文件信息</h5><pre><code>lsof | grep ‘/filepath/filepath2/’</code></pre><h5 id="五、列出某个用户打开的文件信息"><a href="#五、列出某个用户打开的文件信息" class="headerlink" title="五、列出某个用户打开的文件信息"></a>五、列出某个用户打开的文件信息</h5><pre><code>lsof  -u username</code></pre><h5 id="六、列出某个用户打开的文件信息"><a href="#六、列出某个用户打开的文件信息" class="headerlink" title="六、列出某个用户打开的文件信息"></a>六、列出某个用户打开的文件信息</h5><pre><code>lsof -c mysql # -c 选项将会列出所有以mysql开头的程序的文件，其实你也可以写成 lsof | grep mysql, 但是第一种方法明显比第二种方法要少打几个字符了</code></pre><h5 id="七、列出多个程序多打开的文件信息"><a href="#七、列出多个程序多打开的文件信息" class="headerlink" title="七、列出多个程序多打开的文件信息"></a>七、列出多个程序多打开的文件信息</h5><pre><code>lsof -c mysql -c apache</code></pre><h5 id="八、列出某个用户以及某个程序所打开的文件信息"><a href="#八、列出某个用户以及某个程序所打开的文件信息" class="headerlink" title="八、列出某个用户以及某个程序所打开的文件信息"></a>八、列出某个用户以及某个程序所打开的文件信息</h5><pre><code>lsof -u test -c mysql</code></pre><h5 id="九、列出除了某个用户外的被打开的文件信息"><a href="#九、列出除了某个用户外的被打开的文件信息" class="headerlink" title="九、列出除了某个用户外的被打开的文件信息"></a>九、列出除了某个用户外的被打开的文件信息</h5><pre><code>lsof   -u ^root #^这个符号在用户名之前，将会把是root用户打开的进程不让显示</code></pre><h5 id="十、通过某个进程号显示该进行打开的文件"><a href="#十、通过某个进程号显示该进行打开的文件" class="headerlink" title="十、通过某个进程号显示该进行打开的文件"></a>十、通过某个进程号显示该进行打开的文件</h5><pre><code>lsof -p 1</code></pre><h5 id="十一、列出多个进程号对应的文件信息"><a href="#十一、列出多个进程号对应的文件信息" class="headerlink" title="十一、列出多个进程号对应的文件信息"></a>十一、列出多个进程号对应的文件信息</h5><pre><code>lsof -p 123,456,789</code></pre><h5 id="十二、列出除了某个进程号，其他进程号所打开的文件信息"><a href="#十二、列出除了某个进程号，其他进程号所打开的文件信息" class="headerlink" title="十二、列出除了某个进程号，其他进程号所打开的文件信息"></a>十二、列出除了某个进程号，其他进程号所打开的文件信息</h5><pre><code>lsof -p ^1</code></pre><h5 id="十三、网络连接"><a href="#十三、网络连接" class="headerlink" title="十三、网络连接"></a>十三、网络连接</h5><pre><code>lsof -i</code></pre><h5 id="十四、tcp-网络连接信息"><a href="#十四、tcp-网络连接信息" class="headerlink" title="十四、tcp 网络连接信息"></a>十四、tcp 网络连接信息</h5><pre><code>lsof  -i tcp</code></pre><h5 id="十五、udp网络连接信息"><a href="#十五、udp网络连接信息" class="headerlink" title="十五、udp网络连接信息"></a>十五、udp网络连接信息</h5><pre><code>lsof  -i udp</code></pre><h5 id="十六、使用端口信息"><a href="#十六、使用端口信息" class="headerlink" title="十六、使用端口信息"></a>十六、使用端口信息</h5><pre><code>lsof -i :3306</code></pre><h5 id="十七、使用udp端口信息"><a href="#十七、使用udp端口信息" class="headerlink" title="十七、使用udp端口信息"></a>十七、使用udp端口信息</h5><pre><code>lsof -i udp:55</code></pre><h5 id="十八、使用tcp端口信息"><a href="#十八、使用tcp端口信息" class="headerlink" title="十八、使用tcp端口信息"></a>十八、使用tcp端口信息</h5><pre><code>lsof -i tcp:80</code></pre><h5 id="十九、用户的所有活跃的网络端口"><a href="#十九、用户的所有活跃的网络端口" class="headerlink" title="十九、用户的所有活跃的网络端口"></a>十九、用户的所有活跃的网络端口</h5><pre><code>lsof  -a -u test -i</code></pre><h5 id="二十、列出所有网络文件系统"><a href="#二十、列出所有网络文件系统" class="headerlink" title="二十、列出所有网络文件系统"></a>二十、列出所有网络文件系统</h5><pre><code>lsof -N</code></pre><h5 id="二十一、域名socket文件"><a href="#二十一、域名socket文件" class="headerlink" title="二十一、域名socket文件"></a>二十一、域名socket文件</h5><pre><code>lsof -u</code></pre><h5 id="二十二、用户组所打开的文件信息"><a href="#二十二、用户组所打开的文件信息" class="headerlink" title="二十二、用户组所打开的文件信息"></a>二十二、用户组所打开的文件信息</h5><pre><code>lsof -g 5555</code></pre><h5 id="二十三、根据文件描述列出对应的文件信息"><a href="#二十三、根据文件描述列出对应的文件信息" class="headerlink" title="二十三、根据文件描述列出对应的文件信息"></a>二十三、根据文件描述列出对应的文件信息</h5><pre><code>lsof -d description(like 2)</code></pre><h5 id="二十四、文件描述范围列出文件信息"><a href="#二十四、文件描述范围列出文件信息" class="headerlink" title="二十四、文件描述范围列出文件信息"></a>二十四、文件描述范围列出文件信息</h5><pre><code>lsof -d 2-3</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-          <category> lsof命令 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hadoop 3.x 单机安装</title>
       <link href="/2020/07/30/Hadoop/"/>
       <url>/2020/07/30/Hadoop/</url>
@@ -50,6 +23,33 @@
         <tags>
             
             <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux lsof命令</title>
+      <link href="/2020/07/30/Liunx-lsof/"/>
+      <url>/2020/07/30/Liunx-lsof/</url>
+      
+        <content type="html"><![CDATA[<p>lsof命令可以列出被进程所打开的文件的信息。被打开的文件可以是</p><ul><li>普通的文件，</li><li>目录  <a id="more"></a></li><li>网络文件系统的文件，</li><li>字符设备文件  </li><li>(函数)共享库  </li><li>管道，命名管道 </li><li>符号链接</li><li>底层的socket字流，网络socket，unix域名socket<br>在linux里面，大部分的东西都是被当做文件的…..还有其他很多</li></ul><hr><h6 id="一、列出所有打开的文件"><a href="#一、列出所有打开的文件" class="headerlink" title="一、列出所有打开的文件"></a>一、列出所有打开的文件</h6><pre><code>lsof # 备注: 如果不加任何参数，就会打开所有被打开的文件，建议加上一下参数来具体定位</code></pre><h6 id="二、列出所有打开的文件"><a href="#二、列出所有打开的文件" class="headerlink" title="二、列出所有打开的文件"></a>二、列出所有打开的文件</h6><pre><code>lsof   /filepath/file </code></pre><h5 id="三、递归查看某个目录的文件信息"><a href="#三、递归查看某个目录的文件信息" class="headerlink" title="三、递归查看某个目录的文件信息"></a>三、递归查看某个目录的文件信息</h5><pre><code>lsof +D /filepath/filepath2/ # 使用了+D，对应目录下的所有子目录和文件都会被列出</code></pre><h5 id="四、遍历查看某个目录的所有文件信息"><a href="#四、遍历查看某个目录的所有文件信息" class="headerlink" title="四、遍历查看某个目录的所有文件信息"></a>四、遍历查看某个目录的所有文件信息</h5><pre><code>lsof | grep ‘/filepath/filepath2/’</code></pre><h5 id="五、列出某个用户打开的文件信息"><a href="#五、列出某个用户打开的文件信息" class="headerlink" title="五、列出某个用户打开的文件信息"></a>五、列出某个用户打开的文件信息</h5><pre><code>lsof  -u username</code></pre><h5 id="六、列出某个用户打开的文件信息"><a href="#六、列出某个用户打开的文件信息" class="headerlink" title="六、列出某个用户打开的文件信息"></a>六、列出某个用户打开的文件信息</h5><pre><code>lsof -c mysql # -c 选项将会列出所有以mysql开头的程序的文件，其实你也可以写成 lsof | grep mysql, 但是第一种方法明显比第二种方法要少打几个字符了</code></pre><h5 id="七、列出多个程序多打开的文件信息"><a href="#七、列出多个程序多打开的文件信息" class="headerlink" title="七、列出多个程序多打开的文件信息"></a>七、列出多个程序多打开的文件信息</h5><pre><code>lsof -c mysql -c apache</code></pre><h5 id="八、列出某个用户以及某个程序所打开的文件信息"><a href="#八、列出某个用户以及某个程序所打开的文件信息" class="headerlink" title="八、列出某个用户以及某个程序所打开的文件信息"></a>八、列出某个用户以及某个程序所打开的文件信息</h5><pre><code>lsof -u test -c mysql</code></pre><h5 id="九、列出除了某个用户外的被打开的文件信息"><a href="#九、列出除了某个用户外的被打开的文件信息" class="headerlink" title="九、列出除了某个用户外的被打开的文件信息"></a>九、列出除了某个用户外的被打开的文件信息</h5><pre><code>lsof   -u ^root #^这个符号在用户名之前，将会把是root用户打开的进程不让显示</code></pre><h5 id="十、通过某个进程号显示该进行打开的文件"><a href="#十、通过某个进程号显示该进行打开的文件" class="headerlink" title="十、通过某个进程号显示该进行打开的文件"></a>十、通过某个进程号显示该进行打开的文件</h5><pre><code>lsof -p 1</code></pre><h5 id="十一、列出多个进程号对应的文件信息"><a href="#十一、列出多个进程号对应的文件信息" class="headerlink" title="十一、列出多个进程号对应的文件信息"></a>十一、列出多个进程号对应的文件信息</h5><pre><code>lsof -p 123,456,789</code></pre><h5 id="十二、列出除了某个进程号，其他进程号所打开的文件信息"><a href="#十二、列出除了某个进程号，其他进程号所打开的文件信息" class="headerlink" title="十二、列出除了某个进程号，其他进程号所打开的文件信息"></a>十二、列出除了某个进程号，其他进程号所打开的文件信息</h5><pre><code>lsof -p ^1</code></pre><h5 id="十三、网络连接"><a href="#十三、网络连接" class="headerlink" title="十三、网络连接"></a>十三、网络连接</h5><pre><code>lsof -i</code></pre><h5 id="十四、tcp-网络连接信息"><a href="#十四、tcp-网络连接信息" class="headerlink" title="十四、tcp 网络连接信息"></a>十四、tcp 网络连接信息</h5><pre><code>lsof  -i tcp</code></pre><h5 id="十五、udp网络连接信息"><a href="#十五、udp网络连接信息" class="headerlink" title="十五、udp网络连接信息"></a>十五、udp网络连接信息</h5><pre><code>lsof  -i udp</code></pre><h5 id="十六、使用端口信息"><a href="#十六、使用端口信息" class="headerlink" title="十六、使用端口信息"></a>十六、使用端口信息</h5><pre><code>lsof -i :3306</code></pre><h5 id="十七、使用udp端口信息"><a href="#十七、使用udp端口信息" class="headerlink" title="十七、使用udp端口信息"></a>十七、使用udp端口信息</h5><pre><code>lsof -i udp:55</code></pre><h5 id="十八、使用tcp端口信息"><a href="#十八、使用tcp端口信息" class="headerlink" title="十八、使用tcp端口信息"></a>十八、使用tcp端口信息</h5><pre><code>lsof -i tcp:80</code></pre><h5 id="十九、用户的所有活跃的网络端口"><a href="#十九、用户的所有活跃的网络端口" class="headerlink" title="十九、用户的所有活跃的网络端口"></a>十九、用户的所有活跃的网络端口</h5><pre><code>lsof  -a -u test -i</code></pre><h5 id="二十、列出所有网络文件系统"><a href="#二十、列出所有网络文件系统" class="headerlink" title="二十、列出所有网络文件系统"></a>二十、列出所有网络文件系统</h5><pre><code>lsof -N</code></pre><h5 id="二十一、域名socket文件"><a href="#二十一、域名socket文件" class="headerlink" title="二十一、域名socket文件"></a>二十一、域名socket文件</h5><pre><code>lsof -u</code></pre><h5 id="二十二、用户组所打开的文件信息"><a href="#二十二、用户组所打开的文件信息" class="headerlink" title="二十二、用户组所打开的文件信息"></a>二十二、用户组所打开的文件信息</h5><pre><code>lsof -g 5555</code></pre><h5 id="二十三、根据文件描述列出对应的文件信息"><a href="#二十三、根据文件描述列出对应的文件信息" class="headerlink" title="二十三、根据文件描述列出对应的文件信息"></a>二十三、根据文件描述列出对应的文件信息</h5><pre><code>lsof -d description(like 2)</code></pre><h5 id="二十四、文件描述范围列出文件信息"><a href="#二十四、文件描述范围列出文件信息" class="headerlink" title="二十四、文件描述范围列出文件信息"></a>二十四、文件描述范围列出文件信息</h5><pre><code>lsof -d 2-3</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+          <category> lsof命令 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
             
         </tags>
       
