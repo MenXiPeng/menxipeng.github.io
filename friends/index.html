@@ -446,6 +446,9 @@
   <div id="pjax-enable-cover">true</div>
   <div id="pjax-permalink">http://menxipeng.com/friends/index.html</div>
   
+  <div id="valine-path">none</div>
+  <div id="valine-placeholder">none</div>
+  
   
 </div>
 
@@ -550,18 +553,17 @@
           
             
               
-  
-    <div class="new-meta-item browse busuanzi">
-      <a class='notlink'>
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <p>
-          <span id="busuanzi_value_page_pv">
-            <i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i>
-          </span>
-        </p>
-      </a>
-    </div>
-  
+  <div class="new-meta-item browse valine">
+    <a class='notlink'>
+      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+      
+      <span id="/friends/" class="leancloud_visitors" data-flag-title="红浪漫会员">
+      <p>
+        <span class="leancloud-visitors-count"></span>
+      </p>
+      </span>
+    </a>
+  </div>
 
 
             
@@ -824,8 +826,8 @@
       <p ct><i class='fas fa-comments'></i> 欢迎评论 <span class='zjsf'>遵纪守法,从我做起～</span></p>
       
       <section id="comments">
-        <div id="disqus_thread">
-  <div id="notShowDisqus" style="display: none;"><i class='fas fa-exclamation-triangle'></i>&nbsp;无法加载Disqus评论系统，请确保您的网络能够正常访问。</div>
+        <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
       </section>
@@ -1000,49 +1002,76 @@
 
 <!-- 评论 （PS：只对 valine 做了 Pjax 兼容） -->
 
-  <script>
-  var disqus_shortname = 'mxp';
-  var disqus_script = 'embed.js';
   
-  function checkDisqus() {
-    setTimeout(() => {
-      if (document.getElementById('notShowDisqus') == null) {return;}
-      if (window.DISQUS == undefined) {
-        document.getElementById('notShowDisqus').style.display = 'block';
-      } else {
-        document.getElementById('notShowDisqus').style.display = 'none';
-      }
-    }, 3000);
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
   }
 
-  function pjax_disqus() {
-    if (document.getElementById('notShowDisqus') == null) {return;}
-    try {
-      if (!window.DISQUS) {
-        (function(d,s) {
-        s = d.createElement('script');s.async=1;s.src = '//' + disqus_shortname + '.disqus.com/'+disqus_script;
-        try {
-          (d.getElementsByTagName('head')[0]).appendChild(s);
-        } catch (error) {
-          document.getElementById('notShowDisqus').style.display = 'block';
-        }
-        })(document);
-      } else {
-        DISQUS.reset({
-          reload: true,
-          config: function () {
-            this.page.identifier = decodeURI(location.pathname),
-            this.page.url = $.trim($('#pjax-permalink').text())
-          }
-        })
-      }
-    } catch (error) {
-      document.getElementById('notShowDisqus').style.display = 'block';
-    }
-    checkDisqus();
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
   }
 
-  pjax_disqus();
+  function pjax_valine() {
+    var valinePath = $.trim($('#valine-path').text()) === "none" ?
+            window.location.pathname : $.trim($('#valine-path').text());
+
+    var valinePlaceholder = $.trim($('#valine-placeholder').text()) === "none" ?
+            "遵纪守法,从我做起~" : $.trim($('#valine-placeholder').text());
+
+    var ALLPATH = '';
+    if(ALLPATH != '') valinePath = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: valinePlaceholder,
+      path: valinePath,
+      appId: "pkfNLJrSHBqUmxMLU38LtCpC-gzGzoHsz",
+      appKey: "Od8tJuSyvLIujMaeJn1xuqIq",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
 </script>
 
 
@@ -1385,10 +1414,10 @@
           pjax_initCopyCode();
         
         
+          pjax_valine();
         
         
         
-          pjax_disqus();
         
         
           pjax_darkmodejs();
