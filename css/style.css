@@ -364,6 +364,10 @@ td,
 th {
   padding: 0;
 }
+.zjsf {
+  color: #ccc;
+  font-size: 14px;
+}
 .article span.btn {
   display: inline;
 }

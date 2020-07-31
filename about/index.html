@@ -40,6 +40,8 @@
   
 
   
+    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
 
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
@@ -440,7 +442,7 @@
   <div id="pjax-ispage">false</div>
   <div id="pjax-pageTitle"></div>
   <div id="pjax-enable-cover">true</div>
-  <div id="pjax-permalink">http://yoursite.com/about/index.html</div>
+  <div id="pjax-permalink">http://menxipeng.com/about/index.html</div>
   
   <div id="valine-path">none</div>
   <div id="valine-placeholder">有什么想对我说的呢？</div>
@@ -526,7 +528,7 @@
     
   <article class="post white-box reveal comments shadow">
     <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
+      <p ct><i class='fas fa-comments'></i> 欢迎评论 <span class='zjsf'>遵纪守法,从我做起～</span></p>
       
       <section id="comments">
         <div id="valine_container" class="valine_thread">
@@ -668,8 +670,8 @@
           }
           shuffle(imgs);
         }
-        if ('.cover') {
-          $('.cover').backstretch(
+        if ('') {
+          $('').backstretch(
             imgs,
           {
             duration: "20000",
@@ -743,7 +745,7 @@
             window.location.pathname : $.trim($('#valine-path').text());
 
     var valinePlaceholder = $.trim($('#valine-placeholder').text()) === "none" ?
-            "快来评论吧~" : $.trim($('#valine-placeholder').text());
+            "遵纪守法,从我做起~" : $.trim($('#valine-placeholder').text());
 
     var ALLPATH = '';
     if(ALLPATH != '') valinePath = ALLPATH;
@@ -1100,8 +1102,8 @@
         pjax_fancybox();
         
           
-          if ('.cover') {
-            $('.cover').backstretch("resize");
+          if ('') {
+            $('').backstretch("resize");
           } else {
             $.backstretch("resize");
           }
