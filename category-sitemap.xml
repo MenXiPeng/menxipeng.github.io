@@ -2,34 +2,34 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://menxipeng.com</loc>
+        <loc>http://123.57.209.158</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>http://menxipeng.com/categories/Linux/lsof%25E5%2591%25BD%25E4%25BB%25A4/</loc>
+        <loc>http://123.57.209.158/categories/Linux/lsof%25E5%2591%25BD%25E4%25BB%25A4/</loc>
         <lastmod>2020-07-31T08:47:31.828Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://menxipeng.com/categories/Linux/</loc>
+        <loc>http://123.57.209.158/categories/Linux/</loc>
         <lastmod>2020-07-31T08:47:31.828Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://menxipeng.com/categories/%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE/Hadoop%25E6%2590%25AD%25E5%25BB%25BA/</loc>
+        <loc>http://123.57.209.158/categories/%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE/Hadoop%25E6%2590%25AD%25E5%25BB%25BA/</loc>
         <lastmod>2020-07-31T08:42:54.544Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://menxipeng.com/categories/%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE/</loc>
+        <loc>http://123.57.209.158/categories/%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE/</loc>
         <lastmod>2020-07-31T08:42:54.544Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

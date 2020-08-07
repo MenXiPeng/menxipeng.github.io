@@ -2,13 +2,13 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://menxipeng.com</loc>
+        <loc>http://123.57.209.158</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>http://menxipeng.com/2020/07/29/index/</loc>
+        <loc>http://123.57.209.158/2020/07/29/index/</loc>
         <lastmod>2020-07-31T08:49:15.131Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -16,7 +16,7 @@
     </url>
 
     <url>
-        <loc>http://menxipeng.com/2020/07/30/Liunx-lsof/</loc>
+        <loc>http://123.57.209.158/2020/07/30/Liunx-lsof/</loc>
         <lastmod>2020-07-31T08:47:31.828Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -24,7 +24,7 @@
     </url>
 
     <url>
-        <loc>http://menxipeng.com/2020/07/30/Hadoop/</loc>
+        <loc>http://123.57.209.158/2020/07/30/Hadoop/</loc>
         <lastmod>2020-07-31T08:42:54.544Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
